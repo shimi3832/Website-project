@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stall 18 - Tindahan ni Mare</title>
+    <style>
+        /* Pinanatili ko ang original styles mo at dinagdagan lang para sa images */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:#f5f9f0;color:#333;transition:0.3s}
+        body.dark{background:#1a1a1a;color:#f0f0f0}
+        
+        /* Logo Style */
+        .logo-img {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #9acd32;
+            background: white;
+        }
+
+        /* Product Thumbnail */
+        .prod-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Rest of your CSS... */
+        body.dark .card{background:#2a2a2a}
+        body.dark input,body.dark select,body.dark textarea{background:#333;color:#f0f0f0;border-color:#555}
+        body.dark nav{background:#2a2a2a}
+        body.dark main{background:#1a1a1a}
+        body.dark .box{background:#2a2a2a;color:#f0f0f0}
+        body.dark h1,body.dark h3{color:#9acd32}
+        body.dark table{background:#2a2a2a}
+        body.dark td{color:#f0f0f0}
+        body.dark p{color:#f0f0f0}
+        body.dark .error{color:#ffb3b3;background:#4a1a1a}
+        body.dark .link{color:#9acd32}
+        body.dark table th{background:#1a1a1a;color:#f0f0f0}
+        body.dark .stat{background:#333;color:#f0f0f0}
+        body.dark .stat-num{color:#9acd32}
+        body.dark .card#announce{background:#1a2a4a!important;color:#f0f0f0}
+        body.dark #notlist>div{background:#1a3a6a!important;color:#f0f0f0}
+        body.dark #actacc{color:#f0f0f0}
+        body.dark #actacc .acc-item{background:#333;color:#f0f0f0}
+        body.dark #actacc .acc-item strong{color:#f0f0f0}
+        body.dark #pend .acc-item{background:#333;color:#f0f0f0}
+        body.dark #pend .acc-item strong{color:#f0f0f0}
+        body.dark #accs .acc-item{background:#333;color:#f0f0f0}
+        body.dark #accs .acc-item strong{color:#f0f0f0}
+        body.dark #accs .acc-item span{color:#f0f0f0}
+        .screen{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#2d5016,#6b8e23);display:flex;align-items:center;justify-content:center}
+        .hidden{display:none!important}
+        .box{background:white;padding:40px;border-radius:10px;width:90%;max-width:400px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.3)}
+        .box h2{color:#2d5016;margin-bottom:20px;font-size:2rem}
+        .box input,.box select{width:100%;padding:12px;margin:10px 0;border:2px solid #ddd;border-radius:6px;font-size:1rem}
+        .box button{width:100%;padding:12px;background:linear-gradient(135deg,#2d5016,#6b8e23);color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:15px}
+        .box button:hover{opacity:0.9}
+        .error{color:red;margin:10px 0;font-weight:bold}
+        .link{margin-top:15px;color:#2d5016;cursor:pointer;font-weight:600;text-decoration:underline}
+        .app{display:none}
+        header{background:linear-gradient(135deg,#2d5016,#6b8e23);color:white;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+        .hamburger{background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;padding:10px}
+        .hamburger span{display:block;width:25px;height:3px;background:white;margin:5px 0}
+        .container{display:flex;min-height:calc(100vh - 60px)}
+        nav{width:200px;background:white;padding:15px 0;border-right:2px solid #ddd;overflow-y:auto}
+        nav.hidden{display:none}
+        .nav-item{padding:15px 20px;cursor:pointer;border-left:4px solid transparent;transition:0.3s}
+        .nav-item:hover{background:#f0f0f0}
+        .nav-item.active{background:#f0f0f0;border-left-color:#6b8e23;color:#2d5016;font-weight:bold}
+        main{flex:1;padding:30px;overflow-y:auto}
+        .section{display:none}
+        .section.active{display:block}
+        h1{color:#2d5016;margin-bottom:20px;border-bottom:3px solid #9acd32;padding-bottom:10px}
+        h3{color:#2d5016;margin-top:15px;margin-bottom:10px}
+        .card{background:white;padding:20px;border-radius:8px;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+        .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin:20px 0}
+        .stat{background:#f0f0f0;padding:20px;border-radius:8px;text-align:center}
+        .stat-num{font-size:2rem;color:#2d5016;font-weight:bold}
+        table{width:100%;border-collapse:collapse;margin-top:15px}
+        th{background:#2d5016;color:white;padding:12px;text-align:left}
+        td{padding:12px;border-bottom:1px solid #e0e0e0; vertical-align: middle;}
+        .btn{padding:10px 15px;background:#2d5016;color:white;border:none;border-radius:5px;cursor:pointer;margin-right:10px;margin-bottom:10px}
+        .btn:hover{opacity:0.8}
+        .btn-danger{background:#c85a54}
+        .btn-success{background:#28a745}
+        input,select,textarea{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:4px;font-family:Arial}
+        .acc-item{background:#f9f9f9;padding:12px;margin:10px 0;border-radius:6px;display:flex;justify-content:space-between;align-items:center}
+        .acc-item.pending{background:#fff3cd}
+    </style>
+</head>
+<body>
+
+<div id="login" class="screen">
+    <div class="box">
+        <img src="1000017768.png" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; border: 3px solid #6b8e23;">
+        <h2>Tindahan ni Mare</h2>
+        <div class="error" id="err"></div>
+        <select id="role"><option value="">Select Role</option><option value="admin">Admin</option><option value="owner">Owner</option><option value="employee">Employee</option></select>
+        <input type="text" id="user" placeholder="Username">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="doLogin()">LOGIN</button>
+        <div class="link" onclick="toSignup()">Create Account</div>
+    </div>
+</div>
+
+<div id="signup" class="screen hidden">
+    <div class="box">
+        <h2>Create Account</h2>
+        <div class="error" id="err2"></div>
+        <select id="srole"><option value="">Select Role</option><option value="owner">Owner</option><option value="employee">Employee</option></select>
+        <input type="text" id="suser" placeholder="Username">
+        <input type="password" id="spass" placeholder="Password">
+        <input type="password" id="spass2" placeholder="Confirm">
+        <button onclick="doSignup()">CREATE</button>
+        <div class="link" onclick="toLogin()">Back</div>
+    </div>
+</div>
+
+<div id="app" class="app">
+    <header>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+            <img src="1000017768.png" class="logo-img" alt="Logo">
+            <h2 id="brand-name">Stall 18</h2>
+        </div>
+        <div id="uinfo" style="color:white;flex:1;text-align:right; padding-right: 15px;"></div>
+        <button class="btn" onclick="toggleDark()" style="margin:0 5px;background:rgba(255,255,255,0.2)">🌙</button>
+        <button class="btn" onclick="doLogout()" style="margin:0">LOGOUT</button>
+    </header>
+    
+    <div class="container">
+        <nav id="nav">
+            <div class="nav-item active" onclick="goTo('dash')">📊 Dashboard</div>
+            <div class="nav-item" onclick="goTo('inv')">📦 Inventory</div>
+            <div class="nav-item" onclick="goTo('prod')">🛍️ Products</div>
+            <div class="nav-item" id="admenu" style="display:none" onclick="goTo('admin')">👑 Admin</div>
+            <div class="nav-item" onclick="goTo('notif')">🔔 Notifications</div>
+            <div class="nav-item" onclick="goTo('settings')">⚙️ Settings</div>
+        </nav>
+        
+        <main>
+            <div id="dash" class="section active">
+                <h1>📊 Dashboard</h1>
+                <div class="card" id="announce" style="background:#e3f2fd;border-left:5px solid #2196f3"></div>
+                <div class="stats">
+                    <div class="stat"><div class="stat-num" id="items">0</div>Items</div>
+                    <div class="stat"><div class="stat-num" id="stock">0</div>Stock</div>
+                    <div class="stat"><div class="stat-num" id="out">0</div>Out</div>
+                    <div class="stat"><div class="stat-num" id="exp">0</div>Expired</div>
+                </div>
+            </div>
+            
+            <div id="inv" class="section">
+                <h1>📦 Inventory</h1>
+                <div style="margin-bottom:15px">
+                    <button class="btn" id="addbtn" onclick="addItem()">+ Add Product</button>
+                    <button class="btn" onclick="exportCSV()">Export CSV</button>
+                </div>
+                <input type="text" id="search" placeholder="Search product..." onkeyup="filter()" style="width:100%;margin-bottom:15px">
+                <div class="card" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Item</th>
+                                <th>Cat</th>
+                                <th>Qty</th>
+                                <th>Exp</th>
+                                <th>Status</th>
+                                <th>Stock</th>
+                                <th>Act</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invtab"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="prod" class="section">
+                <h1>🛍️ Products</h1>
+                <div class="card" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Product</th>
+                                <th>Cat</th>
+                                <th>Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prodtab"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="admin" class="section">
+                <h1>👑 Admin</h1>
+                <h3>📢 Announcement</h3>
+                <div class="card">
+                    <textarea id="ann" placeholder="Type..." style="height:80px"></textarea>
+                    <button class="btn btn-success" onclick="postAnn()">Post</button>
+                </div>
+                <h3>Pending Accounts</h3>
+                <div class="card" id="pend"></div>
+                <h3>All Accounts</h3>
+                <div class="card" id="accs"></div>
+            </div>
+            
+            <div id="notif" class="section">
+                <h1>🔔 Notifications</h1>
+                <button class="btn btn-danger" onclick="clearNotif()">Clear All</button>
+                <div class="card" id="notlist"></div>
+            </div>
+            
+            <div id="settings" class="section">
+                <h1>⚙️ Settings</h1>
+                <h3>Change Password</h3>
+                <div class="card">
+                    <input type="password" id="curr" placeholder="Current Password">
+                    <input type="password" id="new" placeholder="New Password">
+                    <input type="password" id="new2" placeholder="Confirm Password">
+                    <button class="btn btn-success" onclick="changePass()">Update</button>
+                </div>
+                <h3 id="owntit" style="display:none">Pending Employees</h3>
+                <div class="card" id="ownpend" style="display:none"></div>
+                <h3>Active Team</h3>
+                <div class="card" id="actacc"></div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+// Data Management
+let users={admin:[{u:'admin',p:'admin123',ok:1}],owner:[{u:'owner',p:'owner123',ok:1}],employee:[{u:'employee',p:'emp123',ok:1}]};
+// Idinagdag ang 'img' property sa objects
+let inv=[
+    {n:'Nissin Cup Noodles',c:'snacks',q:50,e:'2025-06-15',img:'1000017768.png'},
+    {n:'Yellow Notebook',c:'supplies',q:60,e:'2026-12-31',img:''}
+];
+let pending=[];
+let nots=[];
+let ann='';
+let user=null,role=null;
+
+function load(){let d=localStorage.getItem('s18');if(d){let x=JSON.parse(d);users=x.u||users;inv=x.i||inv;pending=x.p||pending;nots=x.n||nots;ann=x.a||ann}}
+function save(){localStorage.setItem('s18',JSON.stringify({u:users,i:inv,p:pending,n:nots,a:ann}))}
+
+load();
+if(localStorage.getItem('dark')=='1')document.body.classList.add('dark');
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark')?'1':'0')}
+
+function toSignup(){document.getElementById('login').classList.add('hidden');document.getElementById('signup').classList.remove('hidden')}
+function toLogin(){document.getElementById('signup').classList.add('hidden');document.getElementById('login').classList.remove('hidden')}
+
+function doSignup(){
+    let r=document.getElementById('srole').value;
+    let u=document.getElementById('suser').value.trim();
+    let p=document.getElementById('spass').value;
+    let p2=document.getElementById('spass2').value;
+    let e=document.getElementById('err2');
+    if(!r||!u||!p||!p2){e.innerText='Fill all fields';return}
+    if(p!==p2){e.innerText='Passwords do not match';return}
+    if(pending.some(x=>x.u===u)){e.innerText='Already requested';return}
+    pending.push({u,p,r});
+    save();
+    alert('✅ Request Sent! Wait for Admin/Owner approval.');
+    toLogin();
+}
+
+function doLogin(){
+    let r=document.getElementById('role').value;
+    let u=document.getElementById('user').value.trim();
+    let p=document.getElementById('pass').value;
+    let e=document.getElementById('err');
+    if(!r||!u||!p){e.innerText='Fill all';return}
+    let a=users[r].find(x=>x.u===u&&x.p===p);
+    if(!a){e.innerText='Wrong Credentials';return}
+    if(!a.ok){e.innerText='Account pending approval';return}
+    user=u;role=r;
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('app').style.display='block';
+    document.getElementById('uinfo').innerText=u + ' ('+r.toUpperCase()+')';
+    if(role==='admin')document.getElementById('admenu').style.display='block';
+    showAnn();
+    render();
+}
+
+function render(){
+    let t=document.getElementById('invtab');
+    let p=document.getElementById('prodtab');
+    t.innerHTML=''; p.innerHTML='';
+    let tot=0,qty=0,out=0,exp=0;
+
+    inv.forEach((it,i)=>{
+        tot++; qty+=it.q;
+        if(it.q===0)out++;
+        let isExpired = new Date(it.e) < new Date();
+        if(isExpired)exp++;
+
+        let imgHtml = it.img ? `<img src="${it.img}" class="prod-thumb">` : `<div class="prod-thumb" style="background:#eee; display:flex; align-items:center; justify-content:center; font-size:10px; color:#999;">No Image</div>`;
+
+        // Inventory Table
+        let act = (role==='owner'||role==='admin') ? 
+            `<button class="btn btn-danger" onclick="del(${i})">Del</button><button class="btn" onclick="edit(${i})">Edit</button>` : 
+            `<button class="btn" onclick="edit(${i})">Edit</button>`;
+
+        t.innerHTML+=`<tr>
+            <td>${i+1}</td>
+            <td>${imgHtml}</td>
+            <td><strong>${it.n}</strong></td>
+            <td><span style="background:#ffd4a3;padding:4px 8px;border-radius:12px; font-size:12px">${it.c}</span></td>
+            <td>${it.q}</td>
+            <td>${it.e}</td>
+            <td><span style="background:${isExpired?'#dc3545':'#28a745'};color:white;padding:4px 8px;border-radius:4px;font-size:0.85rem">${isExpired?'EXP':'OK'}</span></td>
+            <td><span style="background:${it.q===0?'#dc3545':'#28a745'};color:white;padding:4px 8px;border-radius:12px; font-size:12px">${it.q===0?'OUT':'IN'}</span></td>
+            <td>${act}</td>
+        </tr>`;
+
+        // Products Table
+        p.innerHTML+=`<tr>
+            <td>${i+1}</td>
+            <td>${imgHtml}</td>
+            <td>${it.n}</td>
+            <td>${it.c}</td>
+            <td>${it.q}</td>
+        </tr>`;
+    });
+
+    document.getElementById('items').innerText=tot;
+    document.getElementById('stock').innerText=qty;
+    document.getElementById('out').innerText=out;
+    document.getElementById('exp').innerText=exp;
+    save();
+}
+
+function addItem(){
+    if(role==='employee'){alert('Restricted to Owner/Admin'); return;}
+    let n=prompt('Product Name:'); if(!n)return;
+    let img=prompt('Image Filename or Link (e.g. prod1.jpg):');
+    let c=prompt('Category (snacks/supplies):','snacks').toLowerCase();
+    let q=parseInt(prompt('Initial Quantity:','0'));
+    let e=prompt('Expiry Date (YYYY-MM-DD):','2025-12-31');
+    
+    inv.push({n, c, q, e, img: img || ''});
+    nots.push('Added new product: '+n);
+    render();
+}
+
+function edit(i){
+    let it=inv[i];
+    let nn=prompt('Edit Name:',it.n); if(!nn)return;
+    let ni=prompt('Edit Image Link:',it.img);
+    let nq=parseInt(prompt('Update Quantity:',it.q));
+    let ne=prompt('Update Expiry:',it.e);
+    
+    inv[i]={...it, n:nn, q:nq, e:ne, img:ni};
+    nots.push('Updated product: '+nn);
+    render();
+}
+
+// Helpers
+function doLogout(){if(confirm('Logout?'))location.reload()}
+function toggleMenu(){document.getElementById('nav').classList.toggle('hidden')}
+function goTo(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    if(id==='admin'||id==='settings')loadAdmin();
+    if(id==='notif')loadNot();
+}
+function filter(){
+    let f=document.getElementById('search').value.toUpperCase();
+    let rs=document.getElementById('invtab').getElementsByTagName('tr');
+    for(let r of rs){r.style.display=r.innerText.toUpperCase().includes(f)?'':'none'}
+}
+function del(i){if(confirm('Delete this item?')){inv.splice(i,1); render()}}
+function postAnn(){
+    let t=document.getElementById('ann').value;
+    if(!t)return; ann=t; save(); showAnn(); alert('Posted!');
+}
+function showAnn(){
+    let b=document.getElementById('announce');
+    b.innerHTML = ann ? `<strong>📢 Admin:</strong> ${ann}` : 'No announcements.';
+}
+function exportCSV(){
+    let csv='Product,Category,Quantity,Expiry\n';
+    inv.forEach(i=>csv+=`${i.n},${i.c},${i.q},${i.e}\n`);
+    let b=new Blob([csv],{type:'text/csv'});
+    let a=document.createElement('a');
+    a.href=URL.createObjectURL(b);
+    a.download='stall18_inventory.csv';
+    a.click();
+}
+// Account management logic remains as per your original code
+function loadAdmin(){
+    if(role==='admin'){
+        let h='';
+        pending.forEach((p,i)=>{h+=`<div class="acc-item pending"><div><strong>${p.u}</strong> (${p.r})</div><div><button class="btn btn-success" onclick="app(${i})">Approve</button></div></div>`});
+        document.getElementById('pend').innerHTML=h||'<p>No pending requests.</p>';
+    }
+}
+function app(i){
+    let p=pending[i];
+    if(!users[p.r])users[p.r]=[];
+    users[p.r].push({u:p.u,p:p.p,ok:1});
+    pending.splice(i,1);
+    save(); loadAdmin();
+}
+</script>
+</body>
+</html>
